@@ -1,7 +1,10 @@
 #include <iostream>
 #include "BullAndCow.h"
+#include "Puissance4.h"
+
 using namespace std;
 string choixjeu;
+
 
 int main()
 {
@@ -11,7 +14,10 @@ int main()
 	{
 		BCMainMenu();
 	}
-	system("cls");
+	else if (choixjeu == "4")
+	{
+		PfourMainMenu();
+	}
 	cout << "j'espere que tu t'es amuse" << '\n';
 	return 0;
 }
