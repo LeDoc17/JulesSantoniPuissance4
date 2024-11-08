@@ -10,6 +10,5 @@ void BCMainMenu();
 void OnePlayerGame();
 void TwoPlayersGame();
 bool PlayerTry();
-void Quit();
 void PrintLegend();
 void PrintWin();

@@ -54,12 +54,10 @@ __________      .__  .__     ____   _________
 		}
 		else if (NumPlayer == "Q")
 		{
-			Quit();
 			Choose = true;
 		}
 		else if (NumPlayer == "q")
 		{
-			Quit();
 			Choose = true;
 		}
 		else
@@ -77,7 +75,6 @@ void OnePlayerGame()
 	int Rand = rand() % ((sizeof(WordBank) / sizeof(WordBank[0])) + 1);
 	Word = WordBank[Rand];
 	cout << "------------ Essayez de deviner le mot de " << NumLetters << " lettres ------------" << '\n';
-	cout << "le mot est " << Word << "!" << '\n';
 	while (WordFound == false)
 	{
 		PlayerTry();
@@ -201,7 +198,6 @@ void PrintWin()
 		}
 		else if (Rejouer == "Q" || Rejouer == "q")
 		{
-			Quit();
 			BoucleRejouer = true;
 		}
 		else
@@ -211,24 +207,4 @@ void PrintWin()
 	}
 	return;
 
-}
-
-void Quit()
-{
-	system("cls");
-	std::cout << R"(
-
-           __  ___               _             __     
-          /  |/  /__  __________(_)  ____ _   / /___ _
-         / /|_/ / _ \/ ___/ ___/ /  / __ `/  / / __ `/
-        / /  / /  __/ /  / /__/ /  / /_/ /  / / /_/ / 
-       /_/  /_/\___/_/   \___/_/   \__,_/_ /_/\__,_/  
-      ____  _________  _____/ /_  ____ _(_)___  ___   
-     / __ \/ ___/ __ \/ ___/ __ \/ __ `/ / __ \/ _ \  
-    / /_/ / /  / /_/ / /__/ / / / /_/ / / / / /  __/  
-   / .___/_/   \____/\___/_/ /_/\__,_/_/_/ /_/\___/   
-  /_/                                                 
-
-	)" << '\n';
-	return;
 }

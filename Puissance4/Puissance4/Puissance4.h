@@ -13,7 +13,8 @@ int insert(int x);
 void P1Turn();
 void P2Turn();
 void PrintWin(string x);
-
+void resetBoard();
+void PrintReplay();
 
 //win verificators
 bool win_p1_row(int a);

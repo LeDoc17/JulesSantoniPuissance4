@@ -9,6 +9,8 @@ using namespace std;
 bool winner = false;
 string P1Name;
 string P2Name;
+string choixRejouer;
+bool ReplayValid = false;
 char P1Tile;
 char P2Tile;
 
@@ -29,6 +31,7 @@ int c7 = 6;
 
 void PfourMainMenu()
 {
+	resetBoard();
 	int round = 0;
 	winner = false;
 	system("cls");
@@ -67,6 +70,11 @@ void PfourMainMenu()
 		P1Turn();
 		round++;
 	}
+	if (round >= 21)
+	{
+		cout << "Egalite !" << '\n';
+		PrintReplay();
+	}
 }
 
 void P1Turn()
@@ -81,7 +89,7 @@ void P1Turn()
 		col = 0;
 		cin >> col;
 		while (cin.fail()) {
-			cout << "Choix invalide, choisissez un chiffre entier de 1 à 7: ";
+			cout << "Choix invalide, choisissez un chiffre entier de 1 a 7: ";
 			cin.clear();
 			cin.ignore(256, '\n');
 			cin >> col;
@@ -138,7 +146,7 @@ void P2Turn()
 		col = 0;
 		cin >> col;
 		while (cin.fail()) {
-			cout << "Choix invalide, choisissez un chiffre entier de 1 à 7: ";
+			cout << "Choix invalide, choisissez un chiffre entier de 1 a 7: ";
 			cin.clear();
 			cin.ignore(256, '\n');
 			cin >> col;
@@ -173,6 +181,24 @@ void P2Turn()
 		PrintWin(P2Name);
 		winner = true;
 	}
+}
+
+void resetBoard()
+{
+	for (int i = 0;i < 6;i++)
+	{
+		for (int j = 0;j < 7;j++)
+		{
+			arr[i][j] = '.';
+		}
+	}
+	c1 = 6;
+	c2 = 6;
+	c3 = 6;
+	c4 = 6;
+	c5 = 6;
+	c6 = 6;
+	c7 = 6;
 }
 
 void printBoard(int a, int b, char x)
@@ -527,4 +553,33 @@ void PrintWin(string x)
                              
 	)" << '\n';
 	cout << x << " a gagne !" << '\n';
+	PrintReplay();
+}
+
+void PrintReplay()
+{
+	std::cout << R"(
+
+
+
+	)" << '\n';
+	while (ReplayValid == false)
+	{
+		cout << "Que voulez vous faire ?" << '\n';
+		cout << "Rejouer (R) ou Quitter(Q)" << '\n';
+		cin >> choixRejouer;
+		if (choixRejouer == "R" || choixRejouer == "r")
+		{
+			PfourMainMenu();
+			ReplayValid = true;
+		}
+		else if (choixRejouer == "Q" || choixRejouer == "q")
+		{
+			ReplayValid = true;
+		}
+		else
+		{
+			cout << "Entree invalide" << '\n';
+		}
+	}
 }
