@@ -127,9 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BullAndCow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Puissance4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BullAndCow.h" />
     <ClInclude Include="Puissance4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
