@@ -12,8 +12,10 @@ void printBoard(int a, int b, char x);
 int insert(int x);
 void P1Turn();
 void P2Turn();
+void PrintWin(string x);
 
 
+//win verificators
 bool win_p1_row(int a);
 bool win_p1_dai1(int a, int b);
 bool win_p1_dai2(int a, int b);

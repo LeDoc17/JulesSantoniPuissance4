@@ -6,6 +6,7 @@
 #include <time.h>
 using namespace std;
 
+bool winner = false;
 string P1Name;
 string P2Name;
 char P1Tile;
@@ -29,8 +30,9 @@ int c7 = 6;
 void PfourMainMenu()
 {
 	int round = 0;
-	bool winner = false;
+	winner = false;
 	system("cls");
+	cout << "Bienvenue Dans le" << '\n';
 	std::cout << R"(
  ____  _  _  __  ____  ____   __   __ _   ___  ____     ___ 
 (  _ \/ )( \(  )/ ___)/ ___) / _\ (  ( \ / __)(  __)   / _ \
@@ -44,11 +46,24 @@ void PfourMainMenu()
 	cin >> P2Name;
 	transform(P1Name.begin(), P1Name.end(), P1Name.begin(), ::toupper);
 	transform(P2Name.begin(), P2Name.end(), P2Name.begin(), ::toupper);
-	P1Tile = P1Name.at(0);
-	P2Tile = P2Name.at(0);
-	while (winner == false || round < 21);
+	P1Tile = P1Name[0];
+	P2Tile = P2Name[0];
+	system("cls");
+	for (int i = 0;i < 6;i++)
 	{
-		system("cls");
+		for (int j = 0;j < 7;j++)
+		{
+			cout << arr[i][j] << '|';
+		}
+		cout << endl;
+	}
+	for (int f = 1; f < 8;f++)
+	{
+		cout << f << '|';
+	}
+	cout << endl;
+	while (winner == false && round < 21)
+	{
 		P1Turn();
 		round++;
 	}
@@ -62,13 +77,19 @@ void P1Turn()
 	int row = 0;
 	while (p1 < 1)
 	{
-		cout << P1Name << endl << "Enter colmn: ";
+		cout << P1Name << '\n' << "Choisissez une colonne: ";
 		col = 0;
 		cin >> col;
+		while (cin.fail()) {
+			cout << "Choix invalide, choisissez un chiffre entier de 1 à 7: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> col;
+		}
 		row = insert(col);
 		while (row == -1)
 		{
-			cout << "invalid place, Play Again: ";
+			cout << "Place invalide, choisissez une autre colonne: ";
 			cin >> col;
 			row = insert(col);
 		}
@@ -78,23 +99,27 @@ void P1Turn()
 	}
 	if (win_p1_row(row) == true)
 	{
-		cout << "Player 1 is Winner" << endl << "Congratulations!!";
+		PrintWin(P1Name);
 		win = true;
+		winner = true;
 	}
 	if (win_p1_col(col) == true)
 	{
-		cout << "Player 1 is Winner" << endl << "Congratulations!!";
+		PrintWin(P1Name);
 		win = true;
+		winner = true;
 	}
 	if (win_p1_dai1(row, col) == true)
 	{
-		cout << "Player 1 is Winner" << endl << "Congratulations!!";
+		PrintWin(P1Name);
 		win = true;
+		winner = true;
 	}
 	if (win_p1_dai2(row, col) == true)
 	{
-		cout << "Player 1 is Winner" << endl << "Congratulations!!";
+		PrintWin(P1Name);
 		win = true;
+		winner = true;
 	}
 	if (win == false)
 	{
@@ -109,13 +134,19 @@ void P2Turn()
 	int row = 0;
 	while (p2 < 1)
 	{
-		cout << P2Name << endl << "Enter colmn: ";
+		cout << P2Name << '\n' << "Choisissez une colonne: ";
 		col = 0;
 		cin >> col;
+		while (cin.fail()) {
+			cout << "Choix invalide, choisissez un chiffre entier de 1 à 7: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> col;
+		}
 		row = insert(col);
 		while (row == -1)
 		{
-			cout << "invalid place, Play Again: ";
+			cout << "Place invalide, choisissez une autre colonne: ";
 			cin >> col;
 			row = insert(col);
 		}
@@ -124,19 +155,23 @@ void P2Turn()
 	}
 	if (win_p2_row(row) == true)
 	{
-		cout << "Player 2 is Winner" << endl << "Congratulations!!";
+		PrintWin(P2Name);
+		winner = true;
 	}
 	if (win_p2_col(col) == true)
 	{
-		cout << "Player 2 is Winner" << endl << "Congratulations!!";
+		PrintWin(P2Name);
+		winner = true;
 	}
 	if (win_p2_dai1(row, col) == true)
 	{
-		cout << "Player 2 is Winner" << endl << "Congratulations!!";
+		PrintWin(P2Name);
+		winner = true;
 	}
 	if (win_p2_dai2(row, col) == true)
 	{
-		cout << "Player 2 is Winner" << endl << "Congratulations!!";
+		PrintWin(P2Name);
+		winner = true;
 	}
 }
 
@@ -149,13 +184,13 @@ void printBoard(int a, int b, char x)
 		{
 			cout << arr[i][j] << '|';
 		}
-		cout << endl;
+		cout << '\n';
 	}
 	for (int f = 1; f < 8;f++)
 	{
 		cout << f << '|';
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 //inserting the char in the board
@@ -478,4 +513,18 @@ bool win_p2_dai2(int a, int b)//4th case to win p2
 	}
 	return false;
 
+}
+
+
+void PrintWin(string x)
+{
+	std::cout << R"(
+  _                          
+ | |__  _ __ __ ___   _____  
+ | '_ \| '__/ _` \ \ / / _ \ 
+ | |_) | | | (_| |\ V / (_) |
+ |_.__/|_|  \__,_| \_/ \___/ 
+                             
+	)" << '\n';
+	cout << x << " a gagne !" << '\n';
 }
